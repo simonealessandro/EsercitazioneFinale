@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>List Authors</title>
+</head>
+<body>
+		
+	<div layout:fragment="content">
+	
+		<h2>Utenti</h2>
+		
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>firstName</th>
+					<th>lastName</th>
+					<th>email</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each="user : ${users}">
+					<td th:text="${user.firstName}">firstName</td>
+					<td th:text="${user.lastName}">lastName</td>
+					<td th:text="${user.email}">email</td>
+					<td><a href="#" th:href="@{/admin/delete/} + ${user.id}">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<br/><br/>
+		
+		<p th:if="${users.size() == 0}">
+			<div class="alert alert-warning" role="alert">No users Found.</div>
+		</p>
+		
+	</div>
+		
+</body>
+</html>
