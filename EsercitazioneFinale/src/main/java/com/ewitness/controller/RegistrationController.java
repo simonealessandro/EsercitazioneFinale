@@ -1,6 +1,5 @@
 package com.ewitness.controller;
 
-
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -37,7 +36,7 @@ public class RegistrationController {
 			user.setRole(Role.ROLE_USER);
 		userService.save(user);
 		log.info("--------"+user);
-		redirectAttrs.addFlashAttribute("message", "User"+user.getName()+" was created.");
+		redirectAttrs.addFlashAttribute("message", "User "+user.getName()+" was saved.");
 		return "redirect:/singin";
 		}
 	}
