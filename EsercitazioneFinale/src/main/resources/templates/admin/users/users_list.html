@@ -20,21 +20,19 @@
 			<thead>
 				<tr>
 					<th>Name</th>
+					<th>Email</th>
 					<th>Vate</th>
 					<th>Address</th>
-					<th>Email</th>
-					<th>View</th>
 					<th>Edit</th>
 					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="user : ${users}">
-					<td th:text="${user.Name}">Name</td>
+					<td th:text="${user.name}">Name</td>
+					<td th:text="${user.email}">Email</td>
 					<td th:text="${user.vate}">Vate</td>
-					<td th:text="${user.vate}">Address</td>
-					<td th:text="${user.vate}">Email</td>
-					<td><a href="#" th:href="@{/admin/users/} + ${user.id}">View</a></td>
+					<td th:text="${user.address}">Address</td>	
 					<td><a href="#" th:href="@{/admin/users/edit/} + ${user.id}">Edit</a></td>
 					<td><a href="#" th:href="@{/admin/users/delete/} + ${user.id}">Delete</a></td>
 				</tr>
