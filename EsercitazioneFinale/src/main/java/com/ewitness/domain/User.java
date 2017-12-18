@@ -1,28 +1,18 @@
 package com.ewitness.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table( name="users" )
 public class User {
 	
-//	public enum Role {
-//		ROLE_USER, ROLE_ADMIN
-//	}
+	public enum Role {
+		ROLE_USER, ROLE_ADMIN;
+	}
 
 	@Id
 	@GeneratedValue
@@ -37,16 +27,8 @@ public class User {
 	private String email;
 	private String password;
 	
-//	@Enumerated(EnumType.STRING)
-//	private Role role;
-	
-	@ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER )
-	@JoinTable( 
-		name = "users_roles", 
-		joinColumns = {@JoinColumn(name="user_id")}, 
-		inverseJoinColumns = {@JoinColumn(name="role_id")}  
-	)
-	private Set<Role> roles = new HashSet<Role>();
+	@Enumerated(EnumType.STRING)
+	private Role role;
 	
 	public User() {
 		super();
@@ -100,21 +82,13 @@ public class User {
 		this.password = password;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRole(Role role) {
+		this.role = role;
 	}
-
-//	public Role getRole() {
-//		return role;
-//	}
-//
-//	public void setRole(Role role) {
-//		this.role = role;
-//	}
 
 	
 	

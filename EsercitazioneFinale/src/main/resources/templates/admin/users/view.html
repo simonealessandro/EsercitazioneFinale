@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	layout:decorator="layouts/main">
+<head>
+<title>View User</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+
+		<h2>View User</h2>
+
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Name: </label>
+				<div class="col-md-10">
+					<p class="form-control-static" th:text="${invoice.name}">Name</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Invoice Code</label>
+				<div class="col-md-10">
+					<p class="form-control-static" th:text="${invoice.invoice_code}">slug</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Product Code</label>
+				<div class="col-md-10">
+					<p class="form-control-static" th:text="${invoice.product_code}">slug</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Product Description</label>
+				<div class="col-md-10">
+					<p class="form-control-static"
+						th:text="${invoice.product_description}">Product Description</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Quantity</label>
+				<div class="col-md-10">
+					<p class="form-control-static" th:text="${invoice.quantity}">Quantity</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Unit Price</label>
+				<div class="col-md-10">
+					<p class="form-control-static" th:text="${invoice.unit_price}">Unit
+						Price</p>
+				</div>
+			</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Total Price</label>
+		<div class="col-md-10">
+			<p class="form-control-static" th:text="${invoice.total_price}">Total
+				Price</p>
+		</div>
+	</div>
+
+	</form>
+
+	<a th:href="@{/admin/users/}">Back To Users List</a>
+	<br />
+	<br />
+	<br />
+
+	</div>
+
+</body>
+</html>
