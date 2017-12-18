@@ -6,7 +6,7 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Blog Main Layout</title>
+	<title>Main Layout</title>
 	
 	<link rel="stylesheet" href="../static/css/blog.css" th:href="@{/css/blog.css}"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
@@ -26,37 +26,24 @@
 		<nav class="navbar navbar-default">
 		    <div class="container-fluid">
 		        <div class="navbar-header">
-		            <a class="navbar-brand" href="/">My Blog</a>
+		            <a class="navbar-brand" href="/">FATTURAZIONE</a>
 		        </div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				    <ul class="nav navbar-nav">
 				        <li th:class="${controllerName == 'Home'} ? 'active'"><a href="/">Home</a></li>
-				        <li class="dropdown" th:class="${controllerName == 'Post'} ? 'dropdown active' : 'dropdown'">
-				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts <span class="caret"></span></a>
+				           <li class="dropdown" th:class="${controllerName.startsWith('User')} ? 'dropdown active' : 'dropdown'" sec:authorize="hasRole('USER')">
+				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Invoice <span class="caret"></span></a>
 				            <ul class="dropdown-menu">
-				                <li><a href="/posts/list">List</a></li>
+				                <li><a href="/home/invoice/">List</a></li>
+				                <li><a href="/home/invoice/create">Insert</a></li>
 				            </ul>
-				        </li>
-				        <li class="dropdown" th:class="${controllerName == 'Author'} ? 'dropdown active' : 'dropdown'">
-				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Authors <span class="caret"></span></a>
+				        </li>					        
+				   <li class="dropdown" th:class="${controllerName.startsWith('Admin')} ? 'dropdown active' : 'dropdown'" sec:authorize="hasRole('ADMIN')">
+				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
 				            <ul class="dropdown-menu">
-				                <li><a href="/authors/list">List</a></li>
+				                <li><a href="/admin/users/">List</a></li>
 				            </ul>
-				        </li>
-						<li class="dropdown" th:class="${controllerName.startsWith('Admin')} ? 'dropdown active' : 'dropdown'" sec:authorize="hasRole('ROLE_ADMIN')">
-				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
-				            <ul class="dropdown-menu">
-				                <li><a href="/admin/posts/">Posts</a></li>
-				                <li><a href="/admin/authors/">Authors</a></li>				                
-				            </ul>
-				        </li>
-				        <li class="dropdown" th:class="${controllerName.startsWith('User)} ? 'dropdown active' : 'dropdown'" sec:authorize="hasRole('ROLE_USER')">
-				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
-				            <ul class="dropdown-menu">
-				                <li><a href="/user/">us</a></li>
-				                				                
-				            </ul>
-				        </li>						        
+				        </li>					        
 				    </ul>
 				    <div class="navbar-text navbar-right">
 			            Welcome <span sec:authentication="name">Guest</span> | 

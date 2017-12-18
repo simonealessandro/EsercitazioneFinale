@@ -2,15 +2,14 @@ package com.ewitness.service;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 
-import javax.management.relation.Role;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.ewitness.domain.User;
+import com.ewitness.domain.User.Role;
 
 public class UserDetailsImpl implements UserDetails {
 	
@@ -22,15 +21,13 @@ public class UserDetailsImpl implements UserDetails {
 		this.user = user;
 	}
 	
-//	@Override
-//	public Collection<? extends GrantedAuthority> getAuthorities() {
-//		Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-//		Set<Role> roles = User.getRoles();
-//		for( Role role : roles ) {
-//			authorities.add( new SimpleGrantedAuthority(role.getRole()) ); 
-//		}
-//		return authorities;		
-//	}
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+		Role role = user.getRole();
+		authorities.add( new SimpleGrantedAuthority(role.toString() )); 
+		return authorities;		
+	}
 
 	@Override
 	public String getPassword() {
@@ -40,6 +37,10 @@ public class UserDetailsImpl implements UserDetails {
 	@Override
 	public String getUsername() {
 		return user.getEmail();
+	}
+	
+	public String getRole() {
+		return user.getRole().toString();
 	}
 
 	@Override
@@ -60,12 +61,6 @@ public class UserDetailsImpl implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
-	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

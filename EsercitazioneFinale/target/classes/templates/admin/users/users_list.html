@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorator="layouts/main">
+<head>
+	<title>List Users</title>
+</head>
+<body>
+		
+	<div layout:fragment="content">
+	
+		<h2>Users</h2>
+		
+			<div th:if="${message}" class="alert alert-success" role="alert">
+			<p th:text="${message}">success message</p>
+			</div>
+	
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Vate</th>
+					<th>Address</th>
+					<th>Email</th>
+					<th>View</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${users}">
+					<td th:text="${user.Name}">Name</td>
+					<td th:text="${user.vate}">Vate</td>
+					<td th:text="${user.vate}">Address</td>
+					<td th:text="${user.vate}">Email</td>
+					<td><a href="#" th:href="@{/admin/users/} + ${user.id}">View</a></td>
+					<td><a href="#" th:href="@{/admin/users/edit/} + ${user.id}">Edit</a></td>
+					<td><a href="#" th:href="@{/admin/users/delete/} + ${user.id}">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+		
+		
+		<p th:if="${users.size() == 0}">
+			<div class="alert alert-warning" role="alert">No Users Found.</div>
+		</p>
+		
+	</div>
+		
+</body>
+</html>

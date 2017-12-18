@@ -15,7 +15,7 @@
 			<p th:text="${message}">success message</p>
 		</div>
 
-		<form class="form-horizontal" th:object="${user}" th:action="@{/save}" method="post">
+		<form class="form-horizontal" th:object="${user}" th:action="@{/singin/save}" method="post">
 			<input type="hidden" th:field="*{id}" />
 			<div class="form-group">
 				<label class="col-sm-2 control-label">name: </label>

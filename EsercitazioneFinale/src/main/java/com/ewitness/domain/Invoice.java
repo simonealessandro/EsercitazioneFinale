@@ -1,4 +1,4 @@
-package com.ewitness.domain;
+ package com.ewitness.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -10,18 +10,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ewitness.domain.User;
-import com.ewitness.domain.User.Role;
-import com.ewitness.repository.UserRepo;
-import com.ewitness.service.UserService;
+import com.ewitness.repository.UserRepository;
 
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService  {
+public class UserServiceImpl implements UserServ, UserDetailsService  {
 
 
-	private UserRepo userRepo;
+	private UserRepository userRepo;
 	
 	@Autowired
-	public UserServiceImpl(UserRepo userRepo){
+	public UserServiceImpl(UserRepository userRepo){
 		this.userRepo = userRepo;
 	}
 
@@ -37,7 +35,6 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
 		if( user == null ){
 			throw new UsernameNotFoundException(username);
 		}
-		
 		return new UserDetailsImpl(user);
 	}
 	
@@ -54,10 +51,10 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
 		userRepo.delete(id);
 	} 
 	
-	public User save (User user) {
-		//user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-		user.setRole(Role.ROLE_USER);
-		return userRepo.save(user);
-	}
+//	public User save (User user) {
+//		//user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+//		user.setRole(Role.ROLE_USER);
+//		return userRepo.save(user);
+//	}
 
 }
