@@ -37,11 +37,11 @@ public class AdminController {
 		return "/admin/users/users_list";
 	}
 	
-	@RequestMapping("/admin/users/{id}")
-	public String view(@PathVariable Long id, Model model) {
-		model.addAttribute("user", userService.get(id));
-		return "admin/users/view";
-	}
+//	@RequestMapping("/admin/users/{id}")
+//	public String view(@PathVariable Long id, Model model) {
+//		model.addAttribute("user", userService.get(id));
+//		return "admin/users/view";
+//	}
 //	@RequestMapping("/admin/users/create")
 //	public String create(Model model) {
 //		model.addAttribute("user", new User());
