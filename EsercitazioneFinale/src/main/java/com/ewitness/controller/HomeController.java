@@ -1,8 +1,5 @@
 package com.ewitness.controller;
 
-
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,17 +11,10 @@ import com.ewitness.util.ReadExcel;
 @Controller
 public class HomeController {
 	
-	private UserService userService;
-	
-	@Autowired
-	private ReadExcel a;
-	
-	
-	public HomeController(UserService userService) {
-	
-		this.userService = userService;
-	}
-
+//	@Autowired
+//	private UserService userService;	
+//	@Autowired
+//	private ReadExcel a;
 
 	@RequestMapping("/")
 	public String home(Model model){

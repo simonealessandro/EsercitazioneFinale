@@ -4,23 +4,20 @@ package com.ewitness.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.List;
 
-import javax.validation.Valid;
-
+import org.apache.catalina.util.SystemPropertyReplacerListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ewitness.domain.Invoice;
 import com.ewitness.domain.User;
 import com.ewitness.repository.UserRepository;
@@ -89,9 +86,7 @@ public class UserController {
 		    stream.write(file.getBytes());
 		    stream.close();
 			a.read(filepath, u);
-			
-			
-		  }
+			}
 		  catch (Exception e) {
 		    System.out.println(e.getMessage());
 		    model.addAttribute("message", "errore nel caricamento");
@@ -99,14 +94,26 @@ public class UserController {
 		  }
 		    return "home/invoice/userFormUpload";
 		}
-	
-	@RequestMapping("/home/invoice/totamount")
-	public String totamount(Model model) {
-		model.addAttribute("invoice", new Invoice());
-		return "/home/invoice/userFormUpload";
+
+	@RequestMapping("/home/report")
+	@ResponseBody
+	public double tot(){
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		User u=userRepository.findByEmail(email);
+		double tot=invoiceService.totamount(u.getId());
+		System.out.println(tot);
+		return tot;
 	}
 	
-		
+	@RequestMapping("/home/client")
+	@ResponseBody
+	public List totclient(){
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		User u=userRepository.findByEmail(email);
+		List tot=invoiceService.totbyclient(u.getId());
+		System.out.println(tot);
+		return tot;
 	}
+}
 	
 
