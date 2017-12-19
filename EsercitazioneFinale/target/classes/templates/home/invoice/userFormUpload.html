@@ -1,6 +1,16 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+layout:decorator="layouts/main">
+
+<head>
+	<title>Insert New File</title>
+</head>
 <body>
 
+	<div layout:fragment="content">
+	
+		<h2>Insert New File</h2>
+		<br/>
+	
 	<div th:if="${message}">
 		<h2 th:text="${message}"/>
 	</div>
@@ -8,8 +18,9 @@
 	<div>
 		<form method="POST" enctype="multipart/form-data" th:action="@{/home/invoice/save}">
 			<table>
-				<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
-				<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+				<tr><td>File to upload:</td><td><input type="file" name="file" class="btn btn-primary pull-right"/></td></tr>
+				
+				<tr><td></td><td><input type="submit" value="Upload" class="btn btn-primary pull-right" /></td></tr>
 			</table>
 		</form>
 	</div>
@@ -20,6 +31,8 @@
 				<a th:href="${file}" th:text="${file}" />
 			</li>
 		</ul>
+	</div>
+	
 	</div>
 
 </body>

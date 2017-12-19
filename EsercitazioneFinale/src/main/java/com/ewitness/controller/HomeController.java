@@ -16,6 +16,9 @@ public class HomeController {
 	
 	private UserService userService;
 	
+	@Autowired
+	private ReadExcel a;
+	
 	
 	public HomeController(UserService userService) {
 	
@@ -29,11 +32,11 @@ public class HomeController {
 		return "index";
 	}
 	
-	@RequestMapping("/xls")
-	public String string() throws IOException{
-//		model.addAttribute("user", userService.list());
-		String excelFilePath = "C:\\Users\\Simone\\Desktop\\c.xlsx";
-		ReadExcel.read(excelFilePath);
-		return "index";
-	}
+//	@RequestMapping("/xls")
+//	public String string() throws IOException{
+////		model.addAttribute("user", userService.list());
+//		String excelFilePath = "C:\\Users\\Simone\\Desktop\\c.xlsx";
+//		a.read(excelFilePath);
+//		return "index";
+//	}
 }
