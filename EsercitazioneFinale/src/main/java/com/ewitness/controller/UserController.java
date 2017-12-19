@@ -4,11 +4,14 @@ package com.ewitness.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Paths;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ewitness.domain.Invoice;
 import com.ewitness.domain.User;
+import com.ewitness.repository.UserRepository;
 import com.ewitness.service.InvoiceService;
+import com.ewitness.util.ReadExcel;
 
 
 @Controller
@@ -29,7 +34,13 @@ public class UserController {
 	@Autowired 
 	private InvoiceService invoiceService;
 	
-	private String directory="C:\\Users\\Domenico\\eclipse-workspace\\EsercitazioneFinale\\upload-dir";
+	@Autowired 
+	private UserRepository userRepository;
+	
+	@Autowired
+	private ReadExcel a;
+	
+	private String directory="D:\\lavoro (spero)\\upload-dir";
 	
 	public UserController(InvoiceService invoiceService) {
 		this.invoiceService=invoiceService;
@@ -61,12 +72,15 @@ public class UserController {
 //	}
 	
 	//UPLOAD FATTURA
-	@RequestMapping(value = "/home/invoice/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/home/invoice/save", method = RequestMethod.POST )
 	public String uploadFile(
 	    @RequestParam("file") MultipartFile file, Model model) {
 		try {
 		    // Get the filename and build the local file path (be sure that the 
 		    // application have write permissions on such directory)
+			String email = SecurityContextHolder.getContext().getAuthentication().getName();
+			//userRepository.findByEmail(email);
+			User u=userRepository.findByEmail(email);
 		    String filename = file.getOriginalFilename();
 		    String filepath = Paths.get(directory, filename).toString();
 		    // Save the file locally
@@ -74,14 +88,25 @@ public class UserController {
 		        new BufferedOutputStream(new FileOutputStream(new File(filepath)));
 		    stream.write(file.getBytes());
 		    stream.close();
+			a.read(filepath, u);
+			
+			
 		  }
 		  catch (Exception e) {
 		    System.out.println(e.getMessage());
 		    model.addAttribute("message", "errore nel caricamento");
-		    return "/home/invoice";
+		    return "/home/invoice/userFormUpload";
 		  }
-		    return "home/invoice";
+		    return "home/invoice/userFormUpload";
 		}
+	
+	@RequestMapping("/home/invoice/totamount")
+	public String totamount(Model model) {
+		model.addAttribute("invoice", new Invoice());
+		return "/home/invoice/userFormUpload";
+	}
+	
+		
 	}
 	
 
