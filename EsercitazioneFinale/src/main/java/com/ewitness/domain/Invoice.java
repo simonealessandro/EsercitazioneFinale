@@ -12,6 +12,7 @@ public class Invoice {
 	@GeneratedValue
 	private long id;
 
+	private String name_client;
 	private String vate_client;
 	private String invoice_code;
 	private String product_code;
@@ -97,6 +98,14 @@ public class Invoice {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getName_client() {
+		return name_client;
+	}
+
+	public void setName_client(String name_client) {
+		this.name_client = name_client;
 	}
 	
 	

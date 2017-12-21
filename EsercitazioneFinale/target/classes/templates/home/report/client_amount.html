@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	layout:decorator="layouts/main">
+<head>
+<title>List Invoices</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+
+
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Client Code</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="client : ${clients}">
+								<td th:text="${client}">Client Code</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-4">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Revenue</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="total : ${totals}">
+								<td th:text="${total}">Revenue</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<button type="submit" class="btn btn-primary btn-block"
+					onclick="location.href='/home/report/csv_client'">Export in
+					a .csv file</button>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	layout:decorator="layouts/main">
+<head>
+<title>List Invoices</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+
+
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4">
+				The total revenue for all the invoices is <span th:text="*{total}"></span>
+				</div>
+				<div class="col-sm-4">
+					<button type="submit" class="btn btn-primary btn-block" onclick="location.href='/home/report/csv_total'">Export in a .csv file</button>
+ 			</div>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
