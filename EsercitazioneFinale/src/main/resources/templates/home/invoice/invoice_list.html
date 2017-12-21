@@ -7,20 +7,44 @@
 </head>
 <body>
 		
-	<div layout:fragment="content">
+<div layout:fragment="content">
 	
-	    <article th:each="invoice : ${invoices}">
-			<header>
-				<h2 th:text="${invoice.invoice_code}">Invoice Code</h2>
-			</header>
-			<section th:utext="${invoice.vat_client}">
-				Vat Client
-			</section>
-			<footer>
-				<a th:href="|@{/home/invoice/view/}${invoice.id}|">Read More</a>
-			</footer>
-			<hr/>
-		</article>
+		<h2>Invoices</h2>
+		
+			<div th:if="${message}" class="alert alert-success" role="alert">
+			<p th:text="${message}">success message</p>
+			</div>
+	
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Invoice Code</th>
+					<th>Vate Client</th>
+					<th>Product Code</th>
+					<th>Product Description</th>
+					<th>Quantity</th>
+					<th>Unit Price</th>
+					<th>Total Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="invoice : ${invoices}">
+					<td th:text="${invoice.invoice_code}">Invoice Code</td>
+					<td th:text="${invoice.vate_client}">Vate Client</td>
+					<td th:text="${invoice.product_code}">Product Code</td>
+					<td th:text="${invoice.product_description}">Product Description</td>	
+					<td th:text="${invoice.quantity}">Quantity</td>
+					<td th:text="${invoice.unit_price}">Unit Price</td>	
+					<td th:text="${invoice.total_price}">Total Price</td>	
+				</tr>
+			</tbody>
+		</table>
+		
+		
+		<p th:if="${invoices.size() == 0}">
+			<div class="alert alert-warning" role="alert">No Invoices Found.</div>
+		</p>
 		
 	</div>
 		

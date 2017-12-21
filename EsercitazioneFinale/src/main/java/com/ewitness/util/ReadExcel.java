@@ -114,8 +114,17 @@ public class ReadExcel {
                     	}
                     //invoice.setVate_client((String) getCellValue(cell));
                     break;
+                case 7:
+                	if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
+                        invoice.setName_client(cell.getStringCellValue());
+                        break;}
+                    	if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+                    		double f=cell.getNumericCellValue();
+                    		String tua = Double.toString(f);
+                    		invoice.setName_client(tua);break;
+                    	}
+                    break;
                 }            
-                //listBooks.add(invoice);
             }
             invoice.setUser(user);
             inv.save(invoice);

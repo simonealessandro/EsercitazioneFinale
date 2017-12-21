@@ -9,17 +9,18 @@
 <body>
 		
 	<div layout:fragment="content">
-		
 		<h2>Welcome</h2>
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-4">
 			Here you can log in to your page or register
+			<button type="submit" class="btn btn-primary btn-block" onclick="location.href='/singin'">Register User</button>
  			</div>
-		</div>
-		
-	
-		<button type="submit" class="btn btn-primary btn-block" onclick="location.href='/singin'">Register User</button>	    
+		</div>	    
 	</div>
 		
+		<div th:class="${controllerName == 'Home'} ? 'active'">
+		<div  th:class="${controllerName.startsWith('User')} ? 'active'" sec:authorize="hasRole('USER')">Div da visualizzare da user</div>
+		<div th:class="${controllerName.startsWith('Admin')} ? 'active'" sec:authorize="hasRole('ADMIN')">Div da visualizzare da admin</div>
+		</div>
 </body>
 </html>

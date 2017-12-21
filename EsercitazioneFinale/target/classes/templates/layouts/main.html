@@ -37,7 +37,16 @@
 				                <li><a href="/home/invoice/">List</a></li>
 				                <li><a href="/home/invoice/create">Insert</a></li>
 				            </ul>
-				        </li>					        
+				        </li>	
+				           <li class="dropdown" th:class="${controllerName.startsWith('User')} ? 'dropdown active' : 'dropdown'" sec:authorize="hasRole('USER')">
+				            <a href="/home/report" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Report <span class="caret"></span></a>
+				           	<ul class="dropdown-menu">
+				                <li><a href="/home/report/total_amount">Total Ammount</a></li>
+				                <li><a href="/home/report/client_amount">Client Ammount</a></li>
+				                <li><a href="/home/report/product_amount">Product Ammount</a></li>
+				            
+				            </ul>
+				           </li>					        
 				   <li class="dropdown" th:class="${controllerName.startsWith('Admin')} ? 'dropdown active' : 'dropdown'" sec:authorize="hasRole('ADMIN')">
 				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
 				            <ul class="dropdown-menu">

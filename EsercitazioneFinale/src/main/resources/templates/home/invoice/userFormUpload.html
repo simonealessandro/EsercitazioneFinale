@@ -10,15 +10,19 @@ layout:decorator="layouts/main">
 	
 		<h2>Insert New File</h2>
 		<br/>
+		
+		<div th:if="${errormessage}" class="alert alert-danger" role="alert">
+			<p th:text="${errormessage}">danger message</p>
+		</div>
+		
+		<div th:if="${message}" class="alert alert-success" role="alert">
+			<p th:text="${message}">success message</p>
+		</div>
 	
-	<div th:if="${message}">
-		<h2 th:text="${message}"/>
-	</div>
-
 	<div>
 		<form method="POST" enctype="multipart/form-data" th:action="@{/home/invoice/save}">
 			<table>
-				<tr><td>File to upload:</td><td><input type="file" name="file" class="btn btn-primary pull-right"/></td></tr>
+				<tr><td>File to upload:</td><td><input type="file" name="file" class="pull-right"/></td></tr>
 				
 				<tr><td></td><td><input type="submit" value="Upload" class="btn btn-primary pull-right" /></td></tr>
 			</table>

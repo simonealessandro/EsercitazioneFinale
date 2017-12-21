@@ -1,6 +1,8 @@
 package com.ewitness.service;
 
 
+import java.text.DecimalFormat;
+import java.text.Format;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,18 +27,9 @@ public class InvoiceService {
 		this.invoiceRepository = invoiceRepository;
 	}
 
-//	public Invoice getLatestInvoice(){
-//		return invoiceRepository.findOneByDate();
-//	}
-//
 	public List<Invoice> findByUserId(Long id) {
 		return invoiceRepository.findByUserId(id);
 	}
-//
-//
-//	public List<Invoice> listByUser(Long id) {
-//		return invoiceRepository.findAllByAuthorIdOrderByPostedOnDesc(id);
-//	}
 	public Invoice get(Long id) {
 		return invoiceRepository.findOne(id);
 	}
@@ -54,7 +47,24 @@ public class InvoiceService {
 			f=iterator.next();
 			total+=f.getTotal_price();
 		}
-		return total;
+		long roundedInt = Math.round(total * 100);
+		double result = (double) roundedInt/100;
+		return result;
+	}
+		
+	public List client(long id) {
+		List<Invoice> invoicelist = invoiceRepository.findByUserId(id);
+		Iterator<Invoice> iterator = invoicelist.iterator();
+		Invoice f = new Invoice();
+		List<String> list= new ArrayList<>();
+		
+		while(iterator.hasNext()) {
+			f=iterator.next();
+			if(!list.contains(f.getVate_client())) {
+				list.add(f.getVate_client());
+			}
+		}
+		return list;	
 	}
 	
 	public List totbyclient(long id) {
@@ -81,7 +91,55 @@ public class InvoiceService {
 				total+=f.getTotal_price();
 				}
 			}
-			totali.add(total);
+			long roundedInt = Math.round(total * 100);
+			double result = (double) roundedInt/100;
+			totali.add(result);
+		}
+		return totali;
+	}
+	
+	public List product(long id) {
+		List<Invoice> invoicelist = invoiceRepository.findByUserId(id);
+		Iterator<Invoice> iterator = invoicelist.iterator();
+		Invoice f = new Invoice();
+		List<String> list= new ArrayList<>();
+		
+		while(iterator.hasNext()) {
+			f=iterator.next();
+			if(!list.contains(f.getProduct_code())) {
+				list.add(f.getProduct_code());
+			}
+		}
+		return list;	
+	}
+	
+	public List totbyproduct(long id) {
+		List<Invoice> invoicelist = invoiceRepository.findByUserId(id);
+		Iterator<Invoice> iterator = invoicelist.iterator();
+		Invoice f = new Invoice();
+		List<String> list= new ArrayList<>();
+		List<Double> totali= new ArrayList<>();
+		
+		while(iterator.hasNext()) {
+			f=iterator.next();
+			if(!list.contains(f.getProduct_code())) {
+				list.add(f.getProduct_code());
+			}
+		}			
+//		String a=list.toString();
+//		return a;	
+		for (int i=0; i<list.size(); i++) {
+			double total=0;
+			iterator=invoicelist.iterator();
+			while(iterator.hasNext()) {
+				f=iterator.next();
+				if (f.getProduct_code().equals(list.get(i))) {
+				total+=f.getTotal_price();
+				}
+			}
+			long roundedInt = Math.round(total * 100);
+			double result = (double) roundedInt/100;
+			totali.add(result);
 		}
 		return totali;
 	}
