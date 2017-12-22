@@ -3,7 +3,6 @@ package com.ewitness.service;
 import java.util.Collection;
 import java.util.HashSet;
 
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,8 +26,7 @@ public class UserDetailsImpl implements UserDetails {
 		Role role = user.getRole();
 		authorities.add( new SimpleGrantedAuthority(role.toString() )); 
 		
-		return authorities;	
-		
+		return authorities;		
 	}
 
 	@Override
@@ -64,5 +62,4 @@ public class UserDetailsImpl implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-
 }

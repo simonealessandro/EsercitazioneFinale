@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	layout:decorator="layouts/main">
 <head>
-<title>List Invoices</title>
+<title th:text="#{invoices.title}"></title>
 </head>
 <body>
 
@@ -11,11 +11,12 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-4">
-				The total revenue for all the invoices is <span th:text="*{total}"></span>
+				<p th:text="#{total.amount.text}"></p>
+				<div class="col-sm-4" >
+				<span th:text="*{total }+&euro;"></span>
 				</div>
 				<div class="col-sm-4">
-					<button type="submit" class="btn btn-primary btn-block" onclick="location.href='/home/report/csv_total'">Export in a .csv file</button>
+					<button type="submit" class="btn btn-primary btn-block" onclick="location.href='/home/report/csv_total'" th:text="#{export.button}"></button>
  			</div>
 				
 			</div>

@@ -1,29 +1,19 @@
 package com.ewitness.controller.admin;
 
-
-
-import javax.validation.Valid;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 
 import com.ewitness.service.UserService;
 
-
-
 @Controller
-//@Secured( {"ROLE_ADMIN"} )
 public class AdminController {
-	
-	
+		
 	private UserService userService;
 	
 	@Autowired
@@ -63,12 +53,15 @@ public class AdminController {
 		return "admin/users/adminForm";
 		
 	}
+	
 	@RequestMapping("/admin/users/delete/{id}")
-	public String delete(@PathVariable Long id,RedirectAttributes redAttrs) {
+	public String delete(@PathVariable Long id,RedirectAttributes redAttrs,Locale loc) {
 		
 		userService.delete(id);
-		redAttrs.addFlashAttribute("message","User "+id+" was deleted!");
+		if(loc.getLanguage().equals("en"))
+			redAttrs.addFlashAttribute("message","User "+id+" was deleted!");
+		if(loc.getLanguage().equals("it"))
+			redAttrs.addFlashAttribute("message","L'utente "+id+" è stato eliminato!");
 		return "redirect:/admin/users/";
-	
 	}
 }

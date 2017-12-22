@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ewitness.domain.User;
@@ -15,14 +14,12 @@ import com.ewitness.repository.UserRepository;
 @Service
 public class UserServiceImpl implements UserServ, UserDetailsService  {
 
-
 	private UserRepository userRepo;
 	
 	@Autowired
 	public UserServiceImpl(UserRepository userRepo){
 		this.userRepo = userRepo;
 	}
-
 
 	@Override
 	public User findByEmail(String email) {
@@ -41,8 +38,7 @@ public class UserServiceImpl implements UserServ, UserDetailsService  {
 	public List<User> list(){
 		return userRepo.findAll();
 	}
-	
-	
+		
 	public User get(Long id) {
 		return userRepo.findOne(id);
 	}
@@ -56,5 +52,4 @@ public class UserServiceImpl implements UserServ, UserDetailsService  {
 //		user.setRole(Role.ROLE_USER);
 //		return userRepo.save(user);
 //	}
-
 }

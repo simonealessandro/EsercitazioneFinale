@@ -10,7 +10,7 @@
 		
 		
 		<form th:action="@{/login}" method="post" class="form-signin">
-		    <h2 class="form-signin-heading">Please sign in</h2>
+		    <h2 class="form-signin-heading" th:text="#{signin.text}"></h2>
             <div th:if="${param.error}" class="alert alert-danger">    
                 Invalid username and password.
             </div>
@@ -23,10 +23,9 @@
 		    <input type="password" id="password" name="password" class="form-control" th:placeholder="Password" required="true" />
 		    <div class="checkbox">
 		        <label>
-		            <input id="remember-me" name="remember-me" type="checkbox" /> Remember me
-		        </label>
+		            <input id="remember-me" name="remember-me" type="checkbox" th:text="#{signin.remember}"/></label>
 		    </div>
-		    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		    <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{signin.button}"></button>
 		</form>
 		
 	</div>

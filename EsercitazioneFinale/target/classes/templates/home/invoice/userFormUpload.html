@@ -8,7 +8,7 @@ layout:decorator="layouts/main">
 
 	<div layout:fragment="content">
 	
-		<h2>Insert New File</h2>
+		<h2 th:text="#{file_insert}"></h2>
 		<br/>
 		
 		<div th:if="${errormessage}" class="alert alert-danger" role="alert">
@@ -22,9 +22,9 @@ layout:decorator="layouts/main">
 	<div>
 		<form method="POST" enctype="multipart/form-data" th:action="@{/home/invoice/save}">
 			<table>
-				<tr><td>File to upload:</td><td><input type="file" name="file" class="pull-right"/></td></tr>
+				<tr><td th:text="#{file_upload}"></td><td><input type="file" name="file" class="pull-right"/></td></tr>
 				
-				<tr><td></td><td><input type="submit" value="Upload" class="btn btn-primary pull-right" /></td></tr>
+				<tr><td></td><td><input type="submit" value="Upload" class="btn btn-primary pull-right"/></td></tr>
 			</table>
 		</form>
 	</div>

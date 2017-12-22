@@ -7,8 +7,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.springframework.data.annotation.Transient;
-
 @Entity
 public class User {
 	
@@ -90,8 +88,5 @@ public class User {
 
 	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	
-	
+	}	
 }

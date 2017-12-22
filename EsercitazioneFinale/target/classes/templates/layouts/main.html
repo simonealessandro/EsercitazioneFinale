@@ -19,47 +19,66 @@
 	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
-<body>
-
+<body >
 	<div class="container">
   		 
 		<nav class="navbar navbar-default">
 		    <div class="container-fluid">
 		        <div class="navbar-header">
-		            <a class="navbar-brand" href="/">FATTURAZIONE</a>
+		            <a class="navbar-brand" href="/"><img alt="Ewitness" src="/img/ewitness.jpg" width="90" height="31"/></a>
 		        </div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				    <ul class="nav navbar-nav">
-				        <li th:class="${controllerName == 'Home'} ? 'active'"><a href="/">Home</a></li>
+				         <!-- <li th:class="${controllerName == 'Home'} ? 'active'"><a href="/">Home</a></li> --> 
+				        <li th:class="${controllerName.startsWith('User')} ? 'active'" sec:authorize="hasRole('USER')">
+				            <a href="/user" >UserHome </a>
+
+				        </li>	
+				        <li th:class="${controllerName.startsWith('Admin')} ? ' active'" sec:authorize="hasRole('ADMIN')">
+				            <a href="/admin" >AdminHome</a>
+
+				        </li>
+				        
 				           <li class="dropdown" th:class="${controllerName.startsWith('User')} ? 'dropdown active' : 'dropdown'" sec:authorize="hasRole('USER')">
-				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Invoice <span class="caret"></span></a>
+				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="#{invoices}" ><span class="caret" ></span></a>
 				            <ul class="dropdown-menu">
-				                <li><a href="/home/invoice/">List</a></li>
-				                <li><a href="/home/invoice/create">Insert</a></li>
+				                <li><a href="/home/invoice/" th:text="#{list}"></a></li>
+				                <li><a href="/home/invoice/create" th:text="#{insert}"></a></li>
 				            </ul>
 				        </li>	
 				           <li class="dropdown" th:class="${controllerName.startsWith('User')} ? 'dropdown active' : 'dropdown'" sec:authorize="hasRole('USER')">
-				            <a href="/home/report" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Report <span class="caret"></span></a>
+				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="#{report}" >Report <span class="caret"></span></a>
 				           	<ul class="dropdown-menu">
-				                <li><a href="/home/report/total_amount">Total Ammount</a></li>
-				                <li><a href="/home/report/client_amount">Client Ammount</a></li>
-				                <li><a href="/home/report/product_amount">Product Ammount</a></li>
+				                <li><a href="/home/report/total_amount" th:text="#{total_amount}"></a></li>
+				                <li><a href="/home/report/client_amount" th:text="#{client_amount}"></a></li>
+				                <li><a href="/home/report/product_amount" th:text="#{product_amount}"></a></li>
 				            
 				            </ul>
-				           </li>					        
+				           </li>
+				             			        
 				   <li class="dropdown" th:class="${controllerName.startsWith('Admin')} ? 'dropdown active' : 'dropdown'" sec:authorize="hasRole('ADMIN')">
-				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
+				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="#{users}"> <span class="caret"></span></a>
 				            <ul class="dropdown-menu">
-				                <li><a href="/admin/users/">List</a></li>
+				                <li><a href="/admin/users/" th:text="#{list}"></a></li>
 				            </ul>
-				        </li>					        
+				        </li>
+				    	<li>
+				            <a href="/home/report" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="#{lang}"> <span class="caret"></span></a>
+				           	<ul class="dropdown-menu">
+				                <li><a href="?lang=en"><img th:text="#{english}" alt="English" src="/img/inglese.jpg" width="25" height="19"/></a></li>
+				                <li><a href="?lang=it"><img th:text="#{italian}" alt="Italiano" src="/img/italiano.png" width="25" height="19"/></a></li>				            
+				            </ul>
+				           </li>
+
+				        					        
 				    </ul>
-				    <div class="navbar-text navbar-right">
+				    <div class="navbar-text navbar-right">				    
 			            Welcome <span sec:authentication="name">Guest</span> | 
 				    	<form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
 				    		<a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logout</a>
 				    	</form>
 				    	<a sec:authorize="!isAuthenticated()" th:href="@{/login}"> Login</a>
+				    	
 				    </div>
 				</div>
 		    </div>
