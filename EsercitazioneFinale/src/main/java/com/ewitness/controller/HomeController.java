@@ -6,27 +6,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-	
-//	@Autowired
-//	private UserService userService;	
-//	@Autowired
-//	private ReadExcel a;
-
+		
 	@RequestMapping("/")
-	public String home(Model model){
-//		model.addAttribute("user", userService.list());
+	public String user(Model model){
 		return "index";
 	}
 	
 	@RequestMapping("/user")
-	public String user(Model model){
-//		model.addAttribute("user", userService.list());
+	public String user(){
 		return "home/index_user";
 	}
 	
 	@RequestMapping("/admin")
 	public String admin(Model model){
-//		model.addAttribute("user", userService.list());
 		return "admin/home";
 	}
 	

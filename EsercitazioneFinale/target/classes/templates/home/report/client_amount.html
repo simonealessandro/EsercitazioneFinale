@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	layout:decorator="layouts/main">
 <head>
-<title>List Invoices</title>
+<title th:text="#{invoices.title}"></title>
 </head>
 <body>
 
@@ -10,17 +10,17 @@
 
 
 		<div class="container">
-			<div class="row">
-				<div class="col-sm-4">
+		<div class="row">
+		<div class="col-sm-4">
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>Client Code</th>
+								<th th:text="#{client.name}"></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="client : ${clients}">
-								<td th:text="${client}">Client Code</td>
+							<tr th:each="clientname : ${clientsnames}">
+								<td th:text="${clientname}"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -29,12 +29,26 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>Revenue</th>
+								<th th:text="#{client.code}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="client : ${clients}">
+								<td th:text="${client}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-4">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th th:text="#{revenue} +  &euro;"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="total : ${totals}">
-								<td th:text="${total}">Revenue</td>
+								<td th:text="${total} +  &euro;"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -42,12 +56,10 @@
 			</div>
 			<div class="col-sm-4">
 				<button type="submit" class="btn btn-primary btn-block"
-					onclick="location.href='/home/report/csv_client'">Export in
-					a .csv file</button>
+					onclick="location.href='/home/report/csv_client'" th:text="#{export.button}"></button>
 			</div>
-
+			</div>
 		</div>
-	</div>
 </body>
 </html>
 

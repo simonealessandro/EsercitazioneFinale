@@ -1,5 +1,6 @@
 package com.ewitness.controller;
 
+import java.util.Locale;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -32,11 +33,14 @@ public class RegistrationController {
 		return "auth/registrationForm";
 	}
 	@RequestMapping (value= "/singin/save", method= RequestMethod.POST)
-	public String save(@Valid User user,BindingResult bindingResult,Model model, RedirectAttributes redirectAttrs) {
+	public String save(@Valid User user,BindingResult bindingResult,Model model, RedirectAttributes redirectAttrs, Locale loc) {
 		User userExists = userServ.findByEmail(user.getEmail());
 		if (userExists != null) {
 			bindingResult.hasErrors();
-			redirectAttrs.addFlashAttribute("errormessage", "There is already a user registered with the email provided");
+			if(loc.getLanguage().equals("en"))
+				redirectAttrs.addFlashAttribute("errormessage", "There is already a user registered with the email provided");
+			if(loc.getLanguage().equals("it"))
+				redirectAttrs.addFlashAttribute("errormessage", "Sei già registrato con questa email");
 			return "redirect:/singin";
 		}
 		if(bindingResult.hasErrors()) {
@@ -46,9 +50,27 @@ public class RegistrationController {
 //			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		userService.save(user);
 		log.info("--------"+user);
-		redirectAttrs.addFlashAttribute("message", "User "+user.getName()+" was saved.");
+		if(loc.getLanguage().equals("en"))
+			redirectAttrs.addFlashAttribute("message", "User "+user.getName()+" was saved.");
+		if(loc.getLanguage().equals("it"))
+			redirectAttrs.addFlashAttribute("message", "L'utente "+user.getName()+" è stato salvato.");
 		return "redirect:/singin";
 		}
 	}
-
+	@RequestMapping (value= "/singin/update", method= RequestMethod.POST)
+	public String update(@Valid User user,BindingResult bindingResult,Model model, RedirectAttributes redirectAttrs, Locale loc) {
+		if(bindingResult.hasErrors()) {
+			return "auth/registrationForm";
+		}else {
+			user.setRole(Role.ROLE_USER);
+//			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		userService.save(user);
+		log.info("--------"+user);
+		if(loc.getLanguage().equals("en"))
+			redirectAttrs.addFlashAttribute("message", "User "+user.getName()+" was saved.");
+		if(loc.getLanguage().equals("it"))
+			redirectAttrs.addFlashAttribute("message", "L'utente "+user.getName()+" è stato salvato.");
+		return "redirect:/singin";
+		}
+	}
 }

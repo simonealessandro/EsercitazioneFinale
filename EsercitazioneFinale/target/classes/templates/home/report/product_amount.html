@@ -11,16 +11,16 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-4">
+			<div class="col-sm-4">
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>Product Code</th>
+								<th th:text="#{product_name}"></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="product : ${products}">
-								<td th:text="${product}">Product Code</td>
+							<tr th:each="productname : ${productsnames}">
+								<td th:text="${productname}"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -29,12 +29,26 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>Amount</th>
+								<th th:text="#{product_code}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="product : ${products}">
+								<td th:text="${product}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-4">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th th:text="#{amount} +  &euro;"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="total_product : ${totals_products}">
-								<td th:text="${total_product}">Revenue</td>
+								<td th:text="${total_product} +  &euro;" ></td>
 							</tr>
 						</tbody>
 					</table>
@@ -42,8 +56,7 @@
 			</div>
 			<div class="col-sm-4">
 				<button type="submit" class="btn btn-primary btn-block"
-					onclick="location.href='/home/report/csv_product'">Export in
-					a .csv file</button>
+					onclick="location.href='/home/report/csv_product'" th:text="#{export.button}"></button>
 			</div>
 
 		</div>

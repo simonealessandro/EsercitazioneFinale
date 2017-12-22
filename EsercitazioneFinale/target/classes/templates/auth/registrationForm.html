@@ -2,13 +2,13 @@
 <html lang="en" layout:decorator="layouts/main"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Create New User</title>
+	<title th:text="#{registration.title}"></title>
 </head>
 <body>
 		
 	<div layout:fragment="content">
 	
-		<h2>Create New User</h2>
+		<h2 th:text="#{registration.new}"></h2>
 		<br/>
 		
 		<div th:if="${message}" class="alert alert-success" role="alert">
@@ -22,36 +22,36 @@
 		<form class="form-horizontal" th:object="${user}" th:action="@{/singin/save}" method="post">
 			<input type="hidden" th:field="*{id}" />
 			<div class="form-group">
-				<label class="col-sm-2 control-label">name: </label>
+				<label class="col-sm-2 control-label" th:text="#{name}">: </label>
 				<div class="col-md-10">
 					<input type="text" required="required"  class="form-control" th:field="*{name}" />
 				</div>
 			</div>
 			<div class="form-group">
-		    	<label class="col-sm-2 control-label">vate</label>
+		    	<label class="col-sm-2 control-label" th:text="#{vate}"></label>
 		    	<div class="col-md-10">
 		    		<input type="text" required="required"  class="form-control" th:field="*{vate}" />
 		    	</div>
 		  	</div>
 		  	<div class="form-group">
-		    	<label class="col-sm-2 control-label">address</label>
+		    	<label class="col-sm-2 control-label" th:text="#{address}"></label>
 		    	<div class="col-md-10">
 		    		<input type="text" required="required"  class="form-control" th:field="*{address}" />
 		    	</div>
 		  	</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">email</label>
+				<label class="col-sm-2 control-label" th:text="#{email}"></label>
 				<div class="col-md-10">
 					<input type="email"  class="form-control" th:field="*{email}" />
 				</div>
 			</div>
 				<div class="form-group">
-		    	<label class="col-sm-2 control-label">password</label>
+		    	<label class="col-sm-2 control-label">Password</label>
 		    	<div class="col-md-10">
 		    		<input type="password" required="required"  class="form-control" th:field="*{password}" />
 		    	</div>
 		  	</div>
-			<button type="submit" class="btn btn-default">Submit</button>
+			<button type="submit" class="btn btn-primary" th:text="#{registration.button}"></button>
 		</form>
 		
 	</div>

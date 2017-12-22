@@ -1,8 +1,5 @@
 package com.ewitness.service;
 
-
-import java.text.DecimalFormat;
-import java.text.Format;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -67,6 +64,21 @@ public class InvoiceService {
 		return list;	
 	}
 	
+	public List clientname(long id) {
+		List<Invoice> invoicelist = invoiceRepository.findByUserId(id);
+		Iterator<Invoice> iterator = invoicelist.iterator();
+		Invoice f = new Invoice();
+		List<String> list= new ArrayList<>();
+		
+		while(iterator.hasNext()) {
+			f=iterator.next();
+			if(!list.contains(f.getName_client())) {
+				list.add(f.getName_client());
+			}
+		}
+		return list;	
+	}
+	
 	public List totbyclient(long id) {
 		List<Invoice> invoicelist = invoiceRepository.findByUserId(id);
 		Iterator<Invoice> iterator = invoicelist.iterator();
@@ -108,6 +120,21 @@ public class InvoiceService {
 			f=iterator.next();
 			if(!list.contains(f.getProduct_code())) {
 				list.add(f.getProduct_code());
+			}
+		}
+		return list;	
+	}
+	
+	public List productname(long id) {
+		List<Invoice> invoicelist = invoiceRepository.findByUserId(id);
+		Iterator<Invoice> iterator = invoicelist.iterator();
+		Invoice f = new Invoice();
+		List<String> list= new ArrayList<>();
+		
+		while(iterator.hasNext()) {
+			f=iterator.next();
+			if(!list.contains(f.getProduct_description())) {
+				list.add(f.getProduct_description());
 			}
 		}
 		return list;	

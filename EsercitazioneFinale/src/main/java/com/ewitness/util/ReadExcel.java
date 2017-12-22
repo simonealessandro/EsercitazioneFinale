@@ -72,7 +72,6 @@ public class ReadExcel {
                     		String tuaString = Double.toString(a);
                     		invoice.setProduct_code(tuaString);break;
                     	}
-                    //invoice.setProduct_code(cell.getStringCellValue());
                     break;
                 case 2:
                 	if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
@@ -83,7 +82,6 @@ public class ReadExcel {
                     		String tuaString = Double.toString(a);
                     		invoice.setProduct_description(tuaString);break;
                     	}
-                    //invoice.setProduct_description(cell.getStringCellValue());
                     break;
                 case 3:                
                     invoice.setQuantity((int) cell.getNumericCellValue());
@@ -100,9 +98,6 @@ public class ReadExcel {
                 	double val = Double.parseDouble( String.replace(",",".") );
                     invoice.setUnit_price((float) val);
                     break;    
-//                case 6:
-//                    invoice.setUser((int) getNumericCellValue(cell));
-//                    break;
                 case 6:
                 	if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
                         invoice.setVate_client(cell.getStringCellValue());
@@ -112,7 +107,6 @@ public class ReadExcel {
                     		String tua = Double.toString(f);
                     		invoice.setVate_client(tua);break;
                     	}
-                    //invoice.setVate_client((String) getCellValue(cell));
                     break;
                 case 7:
                 	if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
@@ -131,21 +125,5 @@ public class ReadExcel {
         }        
         workbook.close();
         inputStream.close();
-		}
-	
-//	private Object getCellValue(Cell cell) {
-//	    switch (cell.getCellType()) {
-//	    case Cell.CELL_TYPE_STRING:
-//	        return cell.getStringCellValue();
-//	 
-//	    case Cell.CELL_TYPE_BOOLEAN:
-//	        return cell.getBooleanCellValue();
-//	 
-//	    case Cell.CELL_TYPE_NUMERIC:
-//	        return cell.getNumericCellValue();
-//	    }
-//	 
-//	    return null;
-//	}
-//	
-		}
+	}
+}

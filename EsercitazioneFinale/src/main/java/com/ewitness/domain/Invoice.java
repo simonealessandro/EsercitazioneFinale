@@ -106,8 +106,6 @@ public class Invoice {
 
 	public void setName_client(String name_client) {
 		this.name_client = name_client;
-	}
-	
-	
+	}	
 }
 
